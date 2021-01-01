@@ -428,8 +428,8 @@ query fetchAllDirectors {
 
 ## Aliases and fragments
 
-•	movie(id: 1)- Return one movie for us
-•	We need to use Alias to have more than one movie
+•	movie(id: 1)- Return one movie for us  <br />
+•	We need to use Alias to have more than one movie <br />
 
 ```graphql
 query {
@@ -478,8 +478,8 @@ query {
   	}
 }
 ```
-•	Here we use a lot of repetition.
-•	We can create one fragment, we can use it in both place.
+•	Here we use a lot of repetition. <br />
+•	We can create one fragment, we can use it in both place. <br />
 
 ```graphql
 query {
