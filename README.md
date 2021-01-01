@@ -1,6 +1,5 @@
 # Graphql
-
-[OFficial Documentation](https://docs.graphene-python.org/projects/django/en/latest/)
+[Official Documentation](https://docs.graphene-python.org/projects/django/en/latest/)
 
 ## Introduction
 
@@ -690,5 +689,52 @@ mutation DeleteMovie{
 ```
 
 ## JWT authentication
-
 [Official Documentation](https://django-graphql-jwt.domake.io/en/latest/)
+
+•	Installation
+```bash
+pip install django-graphql-jwt
+```
+•	Add AuthenticationMiddleware middleware to your MIDDLEWARE settings:
+```python
+MIDDLEWARE = [
+    ...
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    ...
+]
+```
+•	Add JSONWebTokenMiddleware middleware to your GRAPHENE settings:
+```python
+GRAPHENE = {
+    'SCHEMA': 'mysite.myschema.schema',
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
+}
+```
+•	Add JSONWebTokenBackend backend to your AUTHENTICATION_BACKENDS:
+```python
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+```
+
+```graphql
+mutation{
+  	tokenAuth(username:"admin", password:"admin")
+  	{
+    		token
+  	}
+}
+```
+
+```json
+{
+	"data": {
+		"tokenAuth": {
+			"token": 						"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTk1MDY4NjY4LCJvcmlnSWF0IjoxNTk1MDY4MzY4fQ.EPbjMEp5bL9sczbmKprU9FivLeIWNvM_iZ5RiEEyJfs"
+		}
+	}
+}
+```
