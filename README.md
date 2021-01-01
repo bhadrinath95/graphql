@@ -10,6 +10,14 @@
 ## Installation
 
 •	pip install graphene_django <br /> 
+```python
+INSTALLED_APPS = [
+    ...
+    'django.contrib.staticfiles', # Required for GraphiQL
+    'graphene_django'
+]
+
+```
 •	INSTALLED_APPS = [ <br /> 
       &nbsp;&nbsp;&nbsp;... <br /> 
       &nbsp;&nbsp;&nbsp;'django.contrib.staticfiles', # Required for GraphiQL <br /> 
@@ -34,3 +42,8 @@
     	      &nbsp;&nbsp;&nbsp;&nbsp;pass <br /> 
       &nbsp;&nbsp;&nbsp;schema = graphene.Schema(query=Query) <br /> 
 
+## Schema
+
+•	A GraphQL schema is at the core of any GraphQL server implementation. <br />
+•	It describes the functionality available to the client applications that connect to it. <br />
+•	Create schema.py to the application. <br />
