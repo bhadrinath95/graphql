@@ -719,6 +719,12 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 ```
+•	In application schema obtain JSON Web Token
+```python
+import graphql_jwt
+class Mutation:
+    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+```
 
 ```graphql
 mutation{
