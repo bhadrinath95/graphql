@@ -9,28 +9,28 @@
 
 ## Installation
 
-•	pip install graphene_django
-•	INSTALLED_APPS = [
-      ...
-      'django.contrib.staticfiles', # Required for GraphiQL
-      'graphene_django'
-  ]
-•	# urls.py If have enabled CSRF protection in your Django app you will find that it prevents your API clients from POSTing to the graphql endpoint.
-  from django.urls import path
-  from django.views.decorators.csrf import csrf_exempt
-  from graphene_django.views import GraphQLView
-  urlpatterns = [
-    	path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
-  ] # graphiql=True to graphiql=False if you do not want to use the GraphiQL API browser.
-•	path('graphql/', GraphQLView.as_view(graphiql=True))
-•	settings.py
-  GRAPHENE = {
-    	'SCHEMA': 'movies.schema.schema'
-  }
-  Where path.schema.schema is the location of the Schema object in your Django project.
-•	schema.py
-  import graphene
-  class Query(graphene.ObjectType):
-    	pass
-  schema = graphene.Schema(query=Query)
+•	pip install graphene_django <br /> 
+•	INSTALLED_APPS = [ <br /> 
+      ... <br /> 
+      'django.contrib.staticfiles', # Required for GraphiQL <br /> 
+      'graphene_django' <br /> 
+  ] <br /> 
+•	# urls.py If have enabled CSRF protection in your Django app you will find that it prevents your API clients from POSTing to the graphql endpoint. <br /> 
+  from django.urls import path <br /> 
+  from django.views.decorators.csrf import csrf_exempt <br /> 
+  from graphene_django.views import GraphQLView <br /> 
+  urlpatterns = [ <br /> 
+    	path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))), <br /> 
+  ] # graphiql=True to graphiql=False if you do not want to use the GraphiQL API browser. <br /> 
+•	path('graphql/', GraphQLView.as_view(graphiql=True)) <br /> 
+•	settings.py <br /> 
+  GRAPHENE = { <br /> 
+    	'SCHEMA': 'movies.schema.schema' <br /> 
+  } <br /> 
+  Where path.schema.schema is the location of the Schema object in your Django project. <br /> 
+•	schema.py <br /> 
+  import graphene <br /> 
+  class Query(graphene.ObjectType): <br /> 
+    	pass <br /> 
+  schema = graphene.Schema(query=Query) <br /> 
 
