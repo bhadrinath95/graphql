@@ -577,3 +577,43 @@ Query Variable <br />
   	"showdirector": true
 }
 ```
+
+# Mutation
+Mutation is to create or update new records.
+
+## Create Mutation
+
+```python
+#app/schema.py
+class MovieCreateMutation(graphene.Mutation):
+    	class Arguments:
+        		title = graphene.String(required=True)
+        		year = graphene.Int(required=True)       
+    		movie = graphene.Field(MovieType)
+    	def mutate(self, info, title, year):
+        		movie = Movie.objects.create(title=title, year=year)
+        		return MovieCreateMutation(movie=movie)
+class Mutation:
+    	create_movie = MovieCreateMutation.Field()
+
+#project/schema.py
+import graphene
+import api.schema
+class Query(api.schema.Query, graphene.ObjectType):
+    	pass
+class Mutation(api.schema.Mutation, graphene.ObjectType):
+    	pass
+schema = graphene.Schema(query=Query, mutation=Mutation)
+```
+
+```graphql
+mutation CreateMovie{
+  	createMovie(title: "text", year: 2020) {
+    		movie {
+      			id
+      			title
+      			year
+    		}
+  	}
+}
+```
