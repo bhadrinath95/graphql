@@ -19,7 +19,7 @@ INSTALLED_APPS = [
 •	# urls.py If have enabled CSRF protection in your Django app you will find that it prevents your API clients from POSTing to the graphql endpoint. <br /> 
 ```
 <br />
-```python
+```python3
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
@@ -27,6 +27,7 @@ urlpatterns = [
     	path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
 ] # graphiql=True to graphiql=False if you do not want to use the GraphiQL API browser.
 ```
+<br />
 •	path('graphql/', GraphQLView.as_view(graphiql=True)) <br /> 
 •	settings.py <br /> 
       &nbsp;&nbsp;&nbsp;GRAPHENE = { <br /> 
