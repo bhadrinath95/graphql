@@ -36,16 +36,26 @@ path('graphql/', GraphQLView.as_view(graphiql=True))
 ```
 
 <br /> 
-•	settings.py <br /> 
-      &nbsp;&nbsp;&nbsp;GRAPHENE = { <br /> 
-    	&nbsp;&nbsp;&nbsp;&nbsp;'SCHEMA': 'movies.schema.schema' <br /> 
-      &nbsp;&nbsp;&nbsp;} <br /> 
-      &nbsp;Where path.schema.schema is the location of the Schema object in your Django project. <br /> 
-•	schema.py <br /> 
-      &nbsp;&nbsp;&nbsp;import graphene <br /> 
-      &nbsp;&nbsp;&nbsp;class Query(graphene.ObjectType): <br /> 
-    	      &nbsp;&nbsp;&nbsp;&nbsp;pass <br /> 
-      &nbsp;&nbsp;&nbsp;schema = graphene.Schema(query=Query) <br /> 
+•	settings.py 
+<br /> 
+
+```python
+GRAPHENE = {
+    	'SCHEMA': 'movies.schema.schema'
+}
+```
+<br />
+Where path.schema.schema is the location of the Schema object in your Django project.
+<br />
+
+•	schema.py 
+<br /> 
+```python
+import graphene
+class Query(graphene.ObjectType):
+    	pass
+schema = graphene.Schema(query=Query)
+```
 
 ## Schema
 
