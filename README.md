@@ -302,6 +302,8 @@ class MovieType(DjangoObjectType):
 ```python
 class Query(graphene.ObjectType):
     all_movies = graphene.List(MovieType)
+    def resolve_all_movies(self, info, **kwargs):
+    	return Movie.objects.all()
 ```
 
 ```graphql
@@ -331,6 +333,94 @@ query {
         			"year": 2009,
         			"movieAge": "New movie"
       			},
+    		]
+  	}
+}
+```
+
+## Multiple models
+
+```python
+class DirectorType(DjangoObjectType):
+    	class Meta:
+        		model = Director
+```
+
+```graphql
+query {
+  	allMovies{
+   		id
+    		title
+    		year
+    		movieAge
+    		director {
+      			name
+      			surname
+    		}
+  	}
+}
+```
+
+```json
+{
+  	"data": {
+    		"allMovies": [
+      			{
+        				"id": "1",
+        				"title": "Titanic",
+        				"year": 1997,
+        				"movieAge": "Old movie",
+        				"director": {
+          					"name": "James",
+          					"surname": "Cameron"
+        				}
+      			},
+      			{
+        				"id": "2",
+        				"title": "Avatar",
+        				"year": 2009,
+        				"movieAge": "New movie",
+        				"director": {
+          					"name": "James",
+          					"surname": "Cameron"
+        				}
+			}
+    		]
+  	}
+}
+```
+
+```python
+class Query(graphene.ObjectType):
+	all_directors = graphene.List(DirectorType)
+	def resolve_all_directors(self, info, **kwargs):
+		return Director.objects.all()
+```
+
+```graphql
+query fetchAllDirectors {
+  	allDirectors {
+    		id
+    		name
+    		surname
+ 	}	
+}
+```
+
+```json
+{
+  	"data": {
+    		"allDirectors": [
+      			{
+        			"id": "1",
+        			"name": "James",
+        			"surname": "Cameron"
+      			},
+      			{
+        			"id": "2",
+        			"name": "Shankar",
+        			"surname": "S"
+      			}
     		]
   	}
 }
