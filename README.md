@@ -107,6 +107,77 @@ query AllMovies {
 }
 ```
 
+```json
+{
+  	"data": {
+    		"allMovies": {
+      			"edges": [
+        			{
+          				"node": {
+            					"id": "TW92aWVOb2RlOjE=",
+            					"title": "Titanic",
+            					"director": {
+              						"name": "James",
+              						"surname": "Cameron"
+            					}
+          				}
+        			},
+        			{
+          				"node": {
+            					"id": "TW92aWVOb2RlOjI=",
+            					"title": "Avatar",
+            					"director": {
+              						"name": "James",
+              						"surname": "Cameron"
+            					}
+          				}
+        			},
+        			{
+          				"node": {
+            					"id": "TW92aWVOb2RlOjM=",
+            					"title": "Terminator",
+            					"director": {
+              						"name": "James",
+              						"surname": "Cameron"
+            					}
+          				}
+        			},
+        			{
+          				"node": {
+            					"id": "TW92aWVOb2RlOjQ=",
+            					"title": "Enthiran",
+            					"director": {
+              						"name": "Shankar",
+              						"surname": "S"
+            					}
+          				}
+        			},
+        			{
+          				"node": {
+            					"id": "TW92aWVOb2RlOjU=",
+            					"title": "2.O",
+            					"director": {
+              						"name": "Shankar",
+              						"surname": "S"
+            					}
+          				}
+        			},
+        			{
+          				"node": {
+            					"id": "TW92aWVOb2RlOjY=",
+            					"title": "I",
+            					"director": {
+              						"name": "Shankar",
+              						"surname": "S"
+            					}
+          				}
+        			}
+      			]
+    		}
+  	}
+}
+```
+
 ```graphql
 query {
   	allMovies{
