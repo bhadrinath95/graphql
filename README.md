@@ -90,8 +90,8 @@ schema = graphene.Schema(query=Query)
 
 ## Query
 
-•	Queries are used for getting data from the database.
-•	We can get either one single record we can filter the record or we can have all the records.
+•	Queries are used for getting data from the database. <br />
+•	We can get either one single record we can filter the record or we can have all the records. <br />
 
 ```graphql
 query AllMovies {
