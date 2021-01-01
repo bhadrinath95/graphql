@@ -744,3 +744,49 @@ mutation{
 	}
 }
 ```
+
+## User in context
+
+```python
+@login_required
+def resolve_all_movies(self, info, **kwargs):
+	"""
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception('Authentication is required')
+        """
+	return Movie.objects.all()
+```
+
+## Authorization
+
+In urls.py
+
+```python
+from graphql_jwt.decorators import jwt_cookie
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('graphql/', jwt_cookie(GraphQLView.as_view(graphiql=True)))
+]
+```
+
+```graphql
+mutation getToken {
+  	tokenAuth(username:"admin", password:"admin")
+  	{
+    		token
+  	}
+}
+```
+
+```graphql
+query fetchAllMovies {
+  	allMovies {
+    		id
+    		title
+    		year
+  	}
+}
+```
+
+Once getToken is executed, cookies will save token and we can able to execute fetchAllMovies.
