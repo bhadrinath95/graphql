@@ -790,3 +790,50 @@ query fetchAllMovies {
 ```
 
 Once getToken is executed, cookies will save token and we can able to execute fetchAllMovies.
+
+**VerifyToken**
+
+```python
+class Mutation:
+    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+    verify_token = graphql_jwt.Verify.Field()
+```
+
+```graphql
+mutation VerifyToken($token: String)  {
+  	verifyToken(token: $token) {
+    		payload
+  	}
+}
+```
+
+Query Variable <br />
+```graphql
+{
+  	"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTk1MDcxMTE2LCJvcmlnSWF0IjoxNTk1MDcwODE2fQ.ZTZqGF85qtvpCns3PFNyN4r3mGb8pKeVCbw2PoudPdk"
+}
+```
+
+```json
+{
+  	"data": {
+    		"verifyToken": {
+      			"payload": {
+        			"username": "admin",
+        			"exp": 1595071116,
+        			"origIat": 1595070816
+      			}
+    		}
+  	}
+}
+```
+
+```python
+#settings.py
+
+GRAPHQL_JWT = {
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=5), => Token expired in 5 mins
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7) => Logged out after 7days
+    }
+```
