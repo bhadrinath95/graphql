@@ -1,5 +1,7 @@
 # Graphql
 
+[OFficial Documentation](https://docs.graphene-python.org/projects/django/en/latest/)
+
 ## Introduction
 
 •	GraphQL is a query language and specification for API. <br /> 
@@ -686,3 +688,7 @@ mutation DeleteMovie{
  	}
 }
 ```
+
+## JWT authentication
+
+[Official Documentation](https://django-graphql-jwt.domake.io/en/latest/)
