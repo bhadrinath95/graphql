@@ -41,7 +41,7 @@ path('graphql/', GraphQLView.as_view(graphiql=True))
 
 ```python
 GRAPHENE = {
-    	'SCHEMA': 'movies.schema.schema'
+    'SCHEMA': 'movies.schema.schema'
 }
 ```
 <br />
@@ -53,7 +53,7 @@ Where path.schema.schema is the location of the Schema object in your Django pro
 ```python
 import graphene
 class Query(graphene.ObjectType):
-    	pass
+    pass
 schema = graphene.Schema(query=Query)
 ```
 
@@ -68,12 +68,12 @@ import graphene
 from graphene_django.types import DjangoObjectType
 from .models import Movie
 class MovieType(DjangoObjectType):
-    	class Meta:
-        		model = Movie
+    class Meta:
+        model = Movie
 class Query(graphene.ObjectType):
-    	all_movies = graphene.List(MovieType)
-    	def resolve_all_movies(self, info, **kwargs):
-        		return Movie.objects.all()
+    all_movies = graphene.List(MovieType)
+    def resolve_all_movies(self, info, **kwargs):
+        return Movie.objects.all()
 ```
 <br/>
 
@@ -83,7 +83,7 @@ class Query(graphene.ObjectType):
 import graphene
 import api.schema
 class Query(api.schema.Query, graphene.ObjectType):
-    	pass
+    pass
 schema = graphene.Schema(query=Query)
 ```
 <br />
@@ -342,8 +342,8 @@ query {
 
 ```python
 class DirectorType(DjangoObjectType):
-    	class Meta:
-        		model = Director
+    class Meta:
+        model = Director
 ```
 
 ```graphql
