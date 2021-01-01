@@ -586,23 +586,23 @@ Mutation is to create or update new records.
 ```python
 #app/schema.py
 class MovieCreateMutation(graphene.Mutation):
-    	class Arguments:
-        		title = graphene.String(required=True)
-        		year = graphene.Int(required=True)       
-    		movie = graphene.Field(MovieType)
-    	def mutate(self, info, title, year):
-        		movie = Movie.objects.create(title=title, year=year)
-        		return MovieCreateMutation(movie=movie)
+    class Arguments:
+        title = graphene.String(required=True)
+        year = graphene.Int(required=True)       
+    movie = graphene.Field(MovieType)
+    def mutate(self, info, title, year):
+        movie = Movie.objects.create(title=title, year=year)
+        return MovieCreateMutation(movie=movie)
 class Mutation:
-    	create_movie = MovieCreateMutation.Field()
+    create_movie = MovieCreateMutation.Field()
 
 #project/schema.py
 import graphene
 import api.schema
 class Query(api.schema.Query, graphene.ObjectType):
-    	pass
+    pass
 class Mutation(api.schema.Mutation, graphene.ObjectType):
-    	pass
+    pass
 schema = graphene.Schema(query=Query, mutation=Mutation)
 ```
 <br />
@@ -610,6 +610,74 @@ schema = graphene.Schema(query=Query, mutation=Mutation)
 ```graphql
 mutation CreateMovie{
   	createMovie(title: "text", year: 2020) {
+    		movie {
+      			id
+      			title
+      			year
+    		}
+  	}
+}
+```
+
+## Update Mutation
+
+```python
+#app/schema.py
+class MovieUpdateMutation(graphene.Mutation):
+    class Arguments:
+        title = graphene.String()
+        year = graphene.Int()
+        id = graphene.ID(required=True)
+    movie = graphene.Field(MovieType)
+    def mutate(self, info, id, title, year):
+        movie = Movie.objects.get(pk=id)
+        if title is not None:
+            movie.title = title
+        if year is not None:
+            movie.year = year
+        movie.save()            
+        return MovieCreateMutation(movie=movie) 
+class Mutation:
+    create_movie = MovieCreateMutation.Field()
+    update_movie = MovieUpdateMutation.Field()
+```
+<br />
+
+```graphql
+mutation UpdateMovie{
+  	updateMovie(id: "7", title: "text", year: 2018) {
+    		movie {
+      			id
+      			title
+      			year
+    		}
+  	}
+}
+```
+
+## Delete Mutation
+
+```python
+#app/schema.py
+class MovieDeleteMutation(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True) 
+    movie = graphene.Field(MovieType)
+    def mutate(self, info, id):
+        movie = Movie.objects.get(pk=id)
+        movie.delete()
+       	return MovieDeleteMutation(movie=None)
+
+class Mutation:
+    create_movie = MovieCreateMutation.Field()
+    update_movie = MovieUpdateMutation.Field()
+    delete_movie = MovieDeleteMutation.Field()
+```
+<br />
+
+```graphql
+mutation UpdateMovie{
+  	updateMovie(id: "7", title: "text", year: 2018) {
     		movie {
       			id
       			title
