@@ -504,3 +504,76 @@ fragment movieData on MovieType {
 }
 ```
 
+## Names, variables and directives
+### Names
+
+•	For a good practice in graphql, put name for our queries.
+•	Where executing we can able to select name of the query which we need to execute.
+
+```graphql
+query JustMovies {
+  	allMovies{
+   		 id
+    		title
+    		year
+  	}
+}
+query MoviesAndDirectors {
+  	allMovies{
+    		id
+    		title
+    		year
+    		director {
+      			name
+      			surname
+   		 }
+  	}
+}
+```
+
+### Variable
+
+```graphql
+query MovieAndDirector($id: Int) {
+  	movie(id: $id){
+    		id
+    		title
+    		year
+    		director {
+      			name
+      			surname
+    		}
+  	}
+}
+```
+
+Query Variable <br />
+```graphql
+{
+  	"id": 2
+}
+```
+
+### Directives
+
+```graphql
+query MovieAndDirector($id: Int, $showdirector: Boolean= false) {
+  	movie(id: $id){
+    		id
+    		title
+    		year
+    		director @include(if: $showdirector){
+      			name
+      			surname
+    		}
+  	}
+}
+```
+
+Query Variable <br />
+```graphql
+{
+  	"id": 2,
+  	"showdirector": true
+}
+```
