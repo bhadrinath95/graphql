@@ -676,13 +676,13 @@ class Mutation:
 <br />
 
 ```graphql
-mutation UpdateMovie{
-  	updateMovie(id: "7", title: "text", year: 2018) {
+mutation DeleteMovie{
+  	deleteMovie(id: "8") {
     		movie {
       			id
       			title
       			year
     		}
-  	}
+ 	}
 }
 ```
