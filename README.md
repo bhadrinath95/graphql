@@ -425,3 +425,79 @@ query fetchAllDirectors {
   	}
 }
 ```
+
+## Aliases and fragments
+
+•	movie(id: 1)- Return one movie for us
+•	We need to use Alias to have more than one movie
+
+```graphql
+query {
+  	firstMovie: movie(id: 1) {
+    		id
+    		title
+    		year
+    		director {
+      			name
+      			surname
+    		}
+  	}
+  	secondMovie: movie(id: 2) {
+    		id
+   		 title
+    		year
+    		director {
+      			name
+      			surname
+   		 }
+  	}
+}
+```
+
+```json
+query {
+  	firstMovie: movie(id: 1) {
+    		id
+    		title
+    		year
+    		director {
+      			name
+      			surname
+    		}
+  	}
+  	secondMovie: movie(id: 2) {
+    		id
+   		 title
+    		year
+    		director {
+      			name
+      			surname
+   		 }
+  	}
+}
+```
+•	Here we use a lot of repetition.
+•	We can create one fragment, we can use it in both place.
+
+```graphql
+query {
+  	firstMovie: movie(id: 1) {
+    		...movieData
+  	}
+  	secondMovie: movie(id: 2) {
+   		 ...movieData
+  	}
+}
+
+fragment movieData on MovieType {
+  	id
+  	title
+  	year
+  	movieAge
+  	director {
+    		name
+  		 surname
+  	}
+}
+```
+
