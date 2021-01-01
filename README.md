@@ -314,3 +314,24 @@ query {
   	}
 }
 ```
+
+```json
+{
+  	"data": {
+    		"allMovies": [
+      			{
+        			"id": "1",
+        			"title": "Titanic",
+        			"year": 1997,
+        			"movieAge": "Old movie"
+      			},
+      			{
+        			"id": "2",
+        			"title": "Avatar",
+        			"year": 2009,
+        			"movieAge": "New movie"
+      			},
+    		]
+  	}
+}
+```
