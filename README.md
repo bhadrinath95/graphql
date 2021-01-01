@@ -2,10 +2,10 @@
 
 ## Introduction
 
-•	GraphQL is a query language and specification for API.
-•	GraphQL is an open source server-side technolog y.
-•	This was developed by Facebook to optimize RESTful API calls.
-•	It is an execution engine and a data query language.
+•	GraphQL is a query language and specification for API. <br /> 
+•	GraphQL is an open source server-side technology. <br /> 
+•	This was developed by Facebook to optimize RESTful API calls. <br /> 
+•	It is an execution engine and a data query language. <br /> 
 
 ## Installation
 
