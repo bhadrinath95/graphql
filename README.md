@@ -62,3 +62,28 @@ schema = graphene.Schema(query=Query)
 •	A GraphQL schema is at the core of any GraphQL server implementation. <br />
 •	It describes the functionality available to the client applications that connect to it. <br />
 •	Create schema.py to the application. <br />
+
+```python
+import graphene 
+from graphene_django.types import DjangoObjectType
+from .models import Movie
+class MovieType(DjangoObjectType):
+    	class Meta:
+        		model = Movie
+class Query(graphene.ObjectType):
+    	all_movies = graphene.List(MovieType)
+    	def resolve_all_movies(self, info, **kwargs):
+        		return Movie.objects.all()
+```
+<br/>
+
+•	Add application schema to project schema
+
+```python
+import graphene
+import api.schema
+class Query(api.schema.Query, graphene.ObjectType):
+    	pass
+schema = graphene.Schema(query=Query)
+```
+<br />
