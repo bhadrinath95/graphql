@@ -480,6 +480,7 @@ query {
 ```
 •	Here we use a lot of repetition. <br />
 •	We can create one fragment, we can use it in both place. <br />
+•	Fragment is type of formatting the piece of code that we will like to reuse in our queries. <br />
 
 ```graphql
 query {
