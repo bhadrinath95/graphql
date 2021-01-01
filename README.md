@@ -130,3 +130,32 @@ query {
   	}
 }
 ```
+
+```graphql
+query fetchAllDirectors {
+  	allDirectors {
+    		id
+    		name
+    		surname
+ 	}	
+}
+```
+
+```json
+{
+  	"data": {
+    		"allDirectors": [
+      			{
+        			"id": "1",
+        			"name": "James",
+        			"surname": "Cameron"
+      			},
+      			{
+        			"id": "2",
+        			"name": "Shankar",
+        			"surname": "S"
+      			}
+    		]
+  	}
+}
+```
