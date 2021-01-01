@@ -110,9 +110,9 @@ query AllMovies {
 ```graphql
 query {
   	allMovies{
-   		 id
+   		id
     		title
-   		 year
+   		year
   	}
 }
 ```
@@ -121,10 +121,10 @@ query {
 {
   	"data": {
     		"allMovies": [
-     			 {
-        				"id": "1",
-        				"title": "Titanic",
-        				"year": 1997
+     			{
+        			"id": "1",
+        			"title": "Titanic",
+        			"year": 1997
       			}
     		]
   	}
