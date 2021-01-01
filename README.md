@@ -285,3 +285,32 @@ query {
   	}
 }
 ```
+
+## Custom query fields
+
+```python
+class MovieType(DjangoObjectType):
+    class Meta:
+        model = Movie
+        
+    movie_age = graphene.String()
+    
+    def resolve_movie_age(self,info):
+        return "Old movie" if self.year < 2000 else "New movie"
+```
+
+```python
+class Query(graphene.ObjectType):
+    all_movies = graphene.List(MovieType)
+```
+
+```graphql
+query {
+  	allMovies{
+    		id
+    		title
+    		year
+    		movieAge
+  	}
+}
+```
