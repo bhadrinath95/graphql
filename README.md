@@ -87,3 +87,22 @@ class Query(api.schema.Query, graphene.ObjectType):
 schema = graphene.Schema(query=Query)
 ```
 <br />
+
+## Query
+
+•	Queries are used for getting data from the database.
+•	We can get either one single record we can filter the record or we can have all the records.
+
+```query
+query AllMovies {
+	allMovies {
+		id
+		title
+		year
+		director	 {
+			name
+			surname
+		}
+	}
+}
+```
