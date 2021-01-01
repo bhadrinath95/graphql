@@ -455,24 +455,26 @@ query {
 ```
 
 ```json
-query {
-  	firstMovie: movie(id: 1) {
-    		id
-    		title
-    		year
-    		director {
-      			name
-      			surname
+{
+  	"data": {
+    		"firstMovie": {
+      			"id": 1,
+      			"title": "Titanic",
+      			"year": 1997,
+      			"director": {
+        				"name": "James",
+        				"surname": "Cameron"
+      			}
+    		},
+    		"secondMovie": {
+      			"id": 2,
+      			"title": "Avatar",
+      			"year": 2009,
+      			"director": {
+        				"name": "James",
+        				"surname": "Cameron"
+      			}
     		}
-  	}
-  	secondMovie: movie(id: 2) {
-    		id
-   		 title
-    		year
-    		director {
-      			name
-      			surname
-   		 }
   	}
 }
 ```
@@ -496,7 +498,7 @@ fragment movieData on MovieType {
   	movieAge
   	director {
     		name
-  		 surname
+  		surname
   	}
 }
 ```
