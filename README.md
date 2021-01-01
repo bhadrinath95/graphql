@@ -26,7 +26,7 @@ from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
 urlpatterns = [
-    	path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
 ] # graphiql=True to graphiql=False if you do not want to use the GraphiQL API browser.
 ```
 <br />
@@ -392,9 +392,9 @@ query {
 
 ```python
 class Query(graphene.ObjectType):
-	all_directors = graphene.List(DirectorType)
-	def resolve_all_directors(self, info, **kwargs):
-		return Director.objects.all()
+all_directors = graphene.List(DirectorType)
+def resolve_all_directors(self, info, **kwargs):
+return Director.objects.all()
 ```
 
 ```graphql
