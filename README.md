@@ -231,7 +231,7 @@ query fetchAllDirectors {
 }
 ```
 
-## Schema
+## Query params
 
 ```python
 class Query(graphene.ObjectType):
