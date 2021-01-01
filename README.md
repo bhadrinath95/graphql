@@ -106,3 +106,27 @@ query AllMovies {
 	}
 }
 ```
+
+```graphql
+query {
+  	allMovies{
+   		 id
+    		title
+   		 year
+  	}
+}
+```
+
+```json
+{
+  	"data": {
+    		"allMovies": [
+     			 {
+        				"id": "1",
+        				"title": "Titanic",
+        				"year": 1997
+      			}
+    		]
+  	}
+}
+```
