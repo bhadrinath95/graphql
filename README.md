@@ -733,7 +733,7 @@ mutation{
 {
 	"data": {
 		"tokenAuth": {
-			"token": 						"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTk1MDY4NjY4LCJvcmlnSWF0IjoxNTk1MDY4MzY4fQ.EPbjMEp5bL9sczbmKprU9FivLeIWNvM_iZ5RiEEyJfs"
+			"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTk1MDY4NjY4LCJvcmlnSWF0IjoxNTk1MDY4MzY4fQ.EPbjMEp5bL9sczbmKprU9FivLeIWNvM_iZ5RiEEyJfs"
 		}
 	}
 }
