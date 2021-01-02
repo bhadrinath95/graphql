@@ -841,4 +841,75 @@ GRAPHQL_JWT = {
 ## Relay
 [Official Documentation](https://relay.dev/docs/en/introduction-to-relay)
 
-•	It’s a framework for building data driven applications and it’s powered by graphics.
+•	It’s a framework for building data driven applications and it’s powered by graphics. <br />
+
+Need to install django-filter
+
+```batch
+pip install django-filter
+```
+
+```python
+from graphene import relay
+from graphene_django.filter import DjangoFilterConnectionField
+#Just For Relay implementation
+class MovieNode(DjangoObjectType):
+    class Meta:
+        model = Movie
+        filter_fields = ['title','year']
+        interfaces = (relay.Node,)
+	
+class Query(graphene.ObjectType):
+    #all_movies = graphene.List(MovieType)
+    all_movies = DjangoFilterConnectionField(MovieNode)
+    all_directors = graphene.List(DirectorType)
+    movie = graphene.Field(MovieType, id= graphene.Int(),title= graphene.String())
+    
+   # We don’t need- def resolve_all_movies(self, info, **kwargs):
+```
+
+```graphql
+query fetchAllMovies {
+  	allMovies {
+    		edges {
+      			node {
+       				 id
+        				title
+        				director {
+         					 name
+          					surname
+        				}
+      			}
+    		}
+  	}
+}
+```
+
+```json
+{
+  	"data": {
+   		 "allMovies": {
+      			"edges": [{
+          				"node": {
+            						"id": "TW92aWVOb2RlOjE=",
+            						"title": "Titanic",
+            						"director": {
+              							"name": "James",
+             							 "surname": "Cameron"
+            							}
+         						 }
+        					},
+        					{
+          					"node": {
+            						"id": "TW92aWVOb2RlOjI=",
+            						"title": "Avatar",
+            						"director": {
+              							"name": "James",
+              							"surname": "Cameron"
+            						}
+          					}
+        		}]
+    		}
+  	}
+}
+```
