@@ -837,3 +837,8 @@ GRAPHQL_JWT = {
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7) => Logged out after 7days
     }
 ```
+
+## Relay
+[Official Documentation](https://relay.dev/docs/en/introduction-to-relay)
+
+•	It’s a framework for building data driven applications and it’s powered by graphics.
