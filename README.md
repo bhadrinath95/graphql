@@ -913,3 +913,73 @@ query fetchAllMovies {
   	}
 }
 ```
+
+## Filters
+
+```python
+class MovieNode(DjangoObjectType):
+    class Meta:
+        model = Movie
+        filter_fields = {
+                'title': ['exact', 'icontains', 'istartswith'],
+                'year': ['exact',]
+            }
+        interfaces = (relay.Node,)
+```
+
+### Exact
+
+```graphql
+query fetchAllMovies {
+  	allMovies(title: "Titanic") {
+    		edges {
+      			node {
+        			id
+        			title
+        			director {
+          				name
+          				surname
+        			}
+      			}
+    		}
+  	}
+}
+```
+
+### IContains
+
+```graphql
+query fetchAllMovies {
+  	allMovies(title_Icontains: "Ti") {
+    		edges {
+      			node {
+        			id
+        			title
+        			director {
+          				name
+          				surname
+        			}
+      			}
+    		}
+  	}
+}
+```
+
+### istartswith
+
+```graphql
+query fetchAllMovies {
+  	allMovies(title_Istartswith: "Ti") {
+    		edges {
+      			node {
+        			id
+        			title
+        			director {
+          				name
+          				surname
+        			}
+      			}
+    		}
+  	}
+}
+```
