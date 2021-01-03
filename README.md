@@ -983,3 +983,238 @@ query fetchAllMovies {
   	}
 }
 ```
+
+## Relay Mutation
+
+```python
+from graphene import relay
+from graphql_relay import from_global_id
+class MovieUpdateMutationRelay(relay.ClientIDMutation):
+    class Input:
+        title = graphene.String()
+        id = graphene.ID(required=True)
+        
+    movie = graphene.Field(MovieType)
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, title):
+        movie = Movie.objects.get(pk=from_global_id(id)[1])
+        if title is not None:
+            movie.title = title
+        movie.save()
+                
+        return MovieUpdateMutationRelay(movie=movie)
+	
+class Mutation:
+    update_movie_relay = MovieUpdateMutationRelay.Field()
+```
+
+```graphql
+mutation mutateRelay {
+  	updateMovieRelay(
+    		input: {
+    			id: "TW92aWVOb2RlOjE=",
+    			title: "Titanic"
+  		}
+	) 
+	{
+    		movie {
+      			id
+      			title
+      			year
+    		}
+  	}
+}
+```
+
+```graphql
+{
+  	"data": {
+    		"updateMovieRelay": {
+      			"movie": {
+        			"id": "1",
+        			"title": "Titanic1",
+        			"year": 1997
+      			}
+    		}
+  	}
+}
+```
+
+## Pagination
+
+```graphql
+query fetchAllMovies {
+	  allMovies(last: 3) {
+		    pageInfo {
+			      startCursor
+			      endCursor
+			      hasNextPage
+			      hasPreviousPage
+		    }
+		    edges {
+			      node {
+					id
+					title
+					director {
+					  name
+					  surname
+				}
+			      }
+		    }
+	  }
+}
+```
+
+```json
+"pageInfo": {
+		"startCursor": "YXJyYXljb25uZWN0aW9uOjM=",
+		"endCursor": "YXJyYXljb25uZWN0aW9uOjU=",
+		"hasNextPage": false,
+		"hasPreviousPage": true
+      }
+```
+
+```graphql
+query fetchAllMovies {
+	  allMovies(last: 2) {
+		    pageInfo {
+			      startCursor
+			      endCursor
+			      hasNextPage
+			      hasPreviousPage
+		    }
+		    edges {
+			      cursor
+			      node {
+					id
+					title
+					director {
+						  name
+						  surname
+					}
+			      }
+		    }
+	  }
+}
+```
+
+```json
+{
+	  "data": {
+		    "allMovies": {
+			      "pageInfo": {
+					"startCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+					"endCursor": "YXJyYXljb25uZWN0aW9uOjU=",
+					"hasNextPage": false,
+					"hasPreviousPage": true
+			      },
+			      "edges": [
+					{
+						  "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+						  "node": {
+							    "id": "TW92aWVOb2RlOjU=",
+							    "title": "2.O",
+							    "director": {
+							      "name": "Shankar",
+							      "surname": "S"
+							    }
+						  }
+					},
+					{
+					  "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+					  "node": {
+						    "id": "TW92aWVOb2RlOjY=",
+						    "title": "I",
+						    "director": {
+						      "name": "Shankar",
+						      "surname": "S"
+						    	}
+					  	}
+					}
+			      ]
+		    }
+	  }
+}
+```
+
+```graphql
+query fetchAllMovies {
+	  allMovies(last: 2, after: "YXJyYXljb25uZWN0aW9uOjM=") {
+		    pageInfo {
+			      startCursor
+			      endCursor
+			      hasNextPage
+			      hasPreviousPage
+		    }
+		    edges {
+			      cursor
+			      node {
+					id
+					title
+					director {
+					  name
+					  surname
+					}
+			      }
+		    }
+	  }
+}
+```
+
+```json 
+{
+	  "data": {
+		    "allMovies": {
+			      "pageInfo": {
+					"startCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+					"endCursor": "YXJyYXljb25uZWN0aW9uOjU=",
+					"hasNextPage": false,
+					"hasPreviousPage": false
+			      },
+			      "edges": [
+					{
+						  "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+						  "node": {
+							    "id": "TW92aWVOb2RlOjU=",
+							    "title": "2.O",
+							    "director": {
+							      "name": "Shankar",
+							      "surname": "S"
+						    }
+					  }
+					},
+					{
+						  "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+						  "node": {
+						    "id": "TW92aWVOb2RlOjY=",
+						    "title": "I",
+						    "director": {
+							      "name": "Shankar",
+							      "surname": "S"
+							    }
+						  }
+					}
+			      ]
+		    }
+	  } 
+}
+```
+
+## Schema
+
+It is set of rules for our graphql what kind of operation will accept on our API.
+
+```batch
+python manage.py graphql_schema
+```
+
+```python
+GRAPHENE = {
+    'SCHEMA': 'movies.schema.schema',
+    'SCHEMA_OUTPUT': 'data/myschema.json', -> Folder to put schema
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
+}
+```
